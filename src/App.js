@@ -10,7 +10,7 @@ const chance = 6;
 let charCounts = {};
 
 function App() {
-  const { 
+  const {
       answerWord, 
       words, setWords, 
       status, setStatus, 
