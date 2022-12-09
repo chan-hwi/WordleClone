@@ -42,7 +42,10 @@ function ResultPopup({ show, setShow, tries, scores, setScores, gameCount, gameO
               {Object.entries(scores).map(([score, count]) => {
                 return <div style={{ display: 'flex', width: '80%' }} key={score}>
                   <div style={{ margin: 0, fontWeight: 'bold', marginRight: '4px' }}>{score}</div>
-                  <ScoreBar active={gameOver === 1 && tries === parseInt(score)} count={count} ratio={!maxCount ? 100 : Math.max(10, Math.floor(count / maxCount * 100))} />
+                  <ScoreBar active={gameOver === 1 && tries === parseInt(score)} 
+                            ratio={!maxCount ? 100 : Math.max(10, Math.floor(count / maxCount * 100))} 
+                            count={count}
+                            show={show} />
                 </div>
               })}
             </div>
@@ -51,8 +54,8 @@ function ResultPopup({ show, setShow, tries, scores, setScores, gameCount, gameO
                            width: '100%', marginTop: '16px', marginBottom: '40px  ' }}>
             <h3>Win VS Lose</h3>
             <div style={{ width: '80%', backgroundColor: 'black', display: 'flex', color: 'white', fontWeight: 'bold' }}>
-              <div className='slide-expand' style={{ width: `${winRatio}%`, padding: '12px 0', backgroundColor: '#5CB85C', display: 'flex', justifyContent: 'center' }}>{winCount > 0 && winCount}</div>
-              <div className='slide-expand' style={{ width: `${100 - winRatio}%`, padding: '12px 0', backgroundColor: '#ff4f4f', display: 'flex', justifyContent: 'center' }}>{gameCount > winCount && gameCount - winCount}</div>
+              <div className={show ? 'slide-expand' : ''} style={{ width: `${winRatio}%`, padding: '12px 0', backgroundColor: '#5CB85C', display: 'flex', justifyContent: 'center' }}>{winCount > 0 && winCount}</div>
+              <div className={show ? 'slide-expand' : ''} style={{ width: `${100 - winRatio}%`, padding: '12px 0', backgroundColor: '#ff4f4f', display: 'flex', justifyContent: 'center' }}>{gameCount > winCount && gameCount - winCount}</div>
             </div>
             <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '80%' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>

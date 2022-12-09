@@ -15,6 +15,12 @@
     animation-timing-function: ease-in-out;
 }
 
+.shake {
+    animation-name: shake;
+    animation-duration: 0.2s;
+    animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
 @keyframes fadein {
     from {
         margin-top: 5%;
@@ -29,11 +35,16 @@
 
 @keyframes slide-expand {
     from {
-        /* transform: scaleX(0); */
         width: 1%;
     }
+}
 
-    /* to {
-        transform: scaleX(1);
-    } */
+@keyframes shake {
+    25% {
+        transform: translateY(-10%);
+    }
+
+    75% {
+        transform: translateY(10%);
+    }
 }

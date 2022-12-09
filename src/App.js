@@ -22,6 +22,7 @@ function App() {
     { initialValue: Object.fromEntries([...Array(chance)].map((num, idx) => [idx + 1, 0])),
       stateToStorage: JSON.stringify, storageToState: JSON.parse });
   const [show, setShow] = useState(false);
+  const [shake, setShake] = useState(false);
 
   useEffect(() => {
     charCounts = Object.fromEntries([...Array(26)].map((num, idx) => [String.fromCharCode('A'.charCodeAt(0) + idx), 0]));
@@ -56,7 +57,10 @@ function App() {
   const handleSubmit = useCallback(() => {
     if (gameOver) return;
     const word = words.slice(-1)[0];
-    if (word.length !== answerWord.length) return;
+    if (word.length !== answerWord.length) {
+      setShake(true);
+      return;
+    };
 
     const curCharCounts = Object.fromEntries([...Array(26)].map((num, idx) => [String.fromCharCode('A'.charCodeAt(0) + idx), 0]));
     const curStatus = Array(word.length).fill(0);
@@ -94,7 +98,7 @@ function App() {
       setGameOver(2);
       setGameCount(gameCount => gameCount + 1);
     } else setWords(words => [...words, ""]);
-  }, [gameOver, words, answerWord, setStatus, keyStatus, setKeyStatus, status, setWords, setGameOver, setGameCount, setScores, scores]);
+  }, [gameOver, words, answerWord, setStatus, keyStatus, setKeyStatus, status, setWords, setGameOver, setGameCount, setScores, scores, setShake]);
 
   useEffect(() => {
     const handleKeyDown = e => {
@@ -119,19 +123,23 @@ function App() {
         len={answerWord.length}
         chance={chance}
         words={words} 
-        status={status}/>
+        status={status}
+        shake={shake}
+        setShake={setShake} />
+
       <Keyboard 
         keyStatus={keyStatus}
         onType={handleType}
         onErase={handleErase}
-        handleSubmit={handleSubmit}
-        />
+        handleSubmit={handleSubmit} />
+
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px' }}>
         <button style={{ border: 'none', outline: 'none', backgroundColor: '#ECECEC', marginTop: '24px', 
                 cursor: 'pointer', padding: '10px', borderRadius: '8px' }} onClick={restartGame}>New Game</button>
         <button style={{ border: 'none', outline: 'none', backgroundColor: '#ECECEC', marginTop: '24px', 
                 cursor: 'pointer', padding: '10px', borderRadius: '8px' }} onClick={() => setShow(true)}>Score Board</button>
       </div>
+
       <ResultPopup 
         show={show} 
         setShow={setShow} 
