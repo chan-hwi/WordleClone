@@ -12,7 +12,8 @@ function ResultPopup({ show, setShow, tries, scores, setScores, gameCount, gameO
         <div style={{ position: 'absolute', width: '100%', height: '100%', backgroundColor: 'rgba(0, 0, 0, 0.5' }}></div>
         <div style={{ position: 'relative', width: '500px', backgroundColor: 'white', display: 'flex', flexDirection: 'column', 
                       justifyContent: 'center', alignItems: 'center', borderRadius: '8px', zIndex: 1, padding: '8px',
-                      transition: 'all', transitionDuration: '0.5s', marginTop: `${show ? '0%' : '5%'}` }}>
+                      transition: 'all', transitionDuration: '0.5s', marginTop: `${show ? '0%' : '5%'}`,
+                      boxShadow: '1px 1px 10px black' }}>
           <header>
             <h1>Game Result</h1>
             <button style={{ position: 'absolute', top: 8, right: 8, width: '32px', height: '32px', outline: 'none', border: 'none',
@@ -27,12 +28,15 @@ function ResultPopup({ show, setShow, tries, scores, setScores, gameCount, gameO
           <article style={{ width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
               {gameOver === 1 ? <h3 style={{ marginTop: 0, textAlign: 'center' }}>You Win!</h3>
-              : <h3 style={{ marginTop: 0, textAlign: 'center' }}><p style={{ marginTop: 0 }}>You Lose!</p><p style={{ marginTop: 0 }}>The Answer was {answerWord}</p></h3>
-              }
+              : gameOver === 2 ? 
+              <h3 style={{ marginTop: 0, textAlign: 'center' }}><p style={{ marginTop: 0 }}>You Lose!</p><p style={{ marginTop: 0 }}>The Answer was {answerWord}</p></h3>
+              : null}
             </div>
+            { gameOver !== 0 && 
             <h4 style={{ marginTop: 0, textAlign: 'center' }}>
               Number of tries: {tries}
             </h4>
+            }
             <h3>Score Distribution</h3>
             <div style={{ display: 'flex', flexDirection: 'column', width: '100%', alignItems: 'center', gap: '4px' }}>
               {Object.entries(scores).map(([score, count]) => {
