@@ -1,0 +1,39 @@
+.fadein {
+    animation-duration: 0.5s;
+    animation-name: fadein;
+}
+
+.fadeout {
+    animation-duration: 0.5s;
+    animation-name: fadein;
+    animation-direction: reverse;
+}
+
+.slide-expand {
+    animation-name: slide-expand;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes fadein {
+    from {
+        margin-top: 5%;
+        opacity: 0%;
+    }
+
+    to {
+        margin-top: 0%;
+        opacity: 100%;
+    }
+}
+
+@keyframes slide-expand {
+    from {
+        /* transform: scaleX(0); */
+        width: 1%;
+    }
+
+    /* to {
+        transform: scaleX(1);
+    } */
+}
